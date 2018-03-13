@@ -1,0 +1,21 @@
+{
+    "name": "nilamdoc/FrameworkLithium",
+    "description": "The li₃ standard distribution, including overarching directory layout, starting application, and a copy of the framework.",
+    "keywords": ["framework","lithium", "li3"],
+    "homepage": "http://li3.me",
+    "license": "BSD-3-Clause",
+    "type": "project",
+    "authors": [
+        {"name": "NilamDoc"},
+        {"name": "Lithium Community"}
+    ],
+    
+   "config": {
+        "vendor-dir": "app"
+    },
+    "prefer-stable": true,
+    "require": {
+      "unionofrad/framework": "^1.1",
+      "zulucrypto/stellar-api": "^1.0"
+    }
+}
