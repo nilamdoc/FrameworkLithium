@@ -16,7 +16,7 @@
 .idea
 
 # Libraries 
-libraries/*
+#libraries/*
 app/libraries/*
 
 # Temporary files, i.e. compiled templates.
