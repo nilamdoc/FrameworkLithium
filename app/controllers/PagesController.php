@@ -9,6 +9,7 @@
 
 namespace app\controllers;
 
+
 /**
  * This controller is used for serving static pages by name, which are located in the `/views/pages`
  * folder.
