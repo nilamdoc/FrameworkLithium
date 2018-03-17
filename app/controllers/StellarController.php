@@ -39,11 +39,11 @@ class StellarController extends \lithium\action\Controller {
 
                 // Use the testnet friendbot to add funds:
                 $response = file_get_contents('https://horizon-testnet.stellar.org/friendbot?addr=' . $publicAccountId);
-print_r($response);
+
                 // After a successful response, the account will have lumens from the testbot
                 if ($response !== false) {
                         $funded = 'Success! Account is now funded.';
-                        return $this->render(array('json'=>array('funded'=>$funded)));
+                        return $this->render(array('json'=>array('funded'=>$funded,'response'=>$response)));
                 }
         }
         public function getAccount($pubkey=null){
