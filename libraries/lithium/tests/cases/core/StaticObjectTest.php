@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -15,6 +15,16 @@ use lithium\tests\mocks\core\MockStaticInstantiator;
 use lithium\tests\mocks\core\MockStaticObject;
 
 class StaticObjectTest extends \lithium\test\Unit {
+
+	protected $_backup = null;
+
+	public function setUp() {
+		error_reporting(($this->_backup = error_reporting()) & ~E_USER_DEPRECATED);
+	}
+
+	public function tearDown() {
+		error_reporting($this->_backup);
+	}
 
 	/**
 	 * Tests that the correct parameters are always passed in `StaticObject::invokeMethod()`,
@@ -47,18 +57,6 @@ class StaticObjectTest extends \lithium\test\Unit {
 			'long', 'then', 'UR', 'DOIN', 'IT', 'RONG'
 		];
 		$this->assertEqual(MockStaticObject::invokeMethod('foo', $params), $params);
-	}
-
-	public function testClassParents() {
-		$class = 'lithium\tests\mocks\core\MockStaticObject';
-		$class::parents(null);
-
-		$result = $class::parents();
-		$expected = ['lithium\core\StaticObject' => 'lithium\core\StaticObject'];
-		$this->assertEqual($expected, $result);
-
-		$cache = $class::parents(true);
-		$this->assertEqual([$class => $expected], $cache);
 	}
 
 	public function testInstanceWithClassesKey() {
@@ -99,6 +97,18 @@ class StaticObjectTest extends \lithium\test\Unit {
 	}
 
 	/* Deprecated / BC */
+
+	public function testClassParents() {
+		$class = 'lithium\tests\mocks\core\MockStaticObject';
+		$class::parents(null);
+
+		$result = $class::parents();
+		$expected = ['lithium\core\StaticObject' => 'lithium\core\StaticObject'];
+		$this->assertEqual($expected, $result);
+
+		$cache = $class::parents(true);
+		$this->assertEqual([$class => $expected], $cache);
+	}
 
 	public function testMethodFiltering() {
 		error_reporting(($original = error_reporting()) & ~E_USER_DEPRECATED);

@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -634,7 +634,12 @@ class MongoDb extends \lithium\data\Source {
 			$resource = $result->sort($args['order'])->limit($args['limit'])->skip($args['offset']);
 			$result = $this->_instance('result', compact('resource'));
 			$config = compact('result', 'query') + ['class' => 'set', 'defaults' => false];
-			return $model::create([], $config);
+			$collection = $model::create([], $config);
+
+			if (is_object($query) && $query->with()) {
+				$model::embed($collection, $query->with());
+			}
+			return $collection;
 		});
 	}
 
@@ -768,6 +773,7 @@ class MongoDb extends \lithium\data\Source {
 		}
 		return !isset($result['err']) || $result['err'] === null;
 	}
+
 	/**
 	 * Executes calculation-related queries, such as those required for `count`.
 	 *

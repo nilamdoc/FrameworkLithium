@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "44e92bc3cbe6e309ba51d9bd55f6fe0a",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -730,16 +729,16 @@
         },
         {
             "name": "zulucrypto/stellar-api",
-            "version": "v0.6.0",
+            "version": "v0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zulucrypto/stellar-api.git",
-                "reference": "05716f87db464f4fe13f48fe786e2c3de0f71da3"
+                "reference": "2fe1e3e88b580105e43c7d2a67a2e86c69c4d597"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zulucrypto/stellar-api/zipball/05716f87db464f4fe13f48fe786e2c3de0f71da3",
-                "reference": "05716f87db464f4fe13f48fe786e2c3de0f71da3",
+                "url": "https://api.github.com/repos/zulucrypto/stellar-api/zipball/2fe1e3e88b580105e43c7d2a67a2e86c69c4d597",
+                "reference": "2fe1e3e88b580105e43c7d2a67a2e86c69c4d597",
                 "shasum": ""
             },
             "require": {
@@ -770,7 +769,7 @@
                 }
             ],
             "description": "API client for the Stellar network",
-            "time": "2018-03-11T17:54:49+00:00"
+            "time": "2018-03-16T23:38:12+00:00"
         }
     ],
     "packages-dev": [],

@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -54,14 +54,6 @@ class Object {
 	 * @var array
 	 */
 	protected $_autoConfig = [];
-
-	/**
-	 * Parents of the current class.
-	 *
-	 * @see lithium\core\Object::_parents()
-	 * @var array
-	 */
-	protected static $_parents = [];
 
 	/**
 	 * Constructor. Initializes class configuration (`$_config`), and assigns object properties
@@ -152,25 +144,6 @@ class Object {
 	}
 
 	/**
-	 * PHP magic method used in conjunction with `var_export()` to allow objects to be
-	 * re-instantiated with their pre-existing properties and values intact. This method can be
-	 * called statically on any class that extends `Object` to return an instance of it.
-	 *
-	 * @param array $data An array of properties and values with which to re-instantiate the object.
-	 *        These properties can be both public and protected.
-	 * @return object Returns an instance of the requested object with the given properties set.
-	 */
-	public static function __set_state($data) {
-		$class = get_called_class();
-		$object = new $class();
-
-		foreach ($data as $property => $value) {
-			$object->{$property} = $value;
-		}
-		return $object;
-	}
-
-	/**
 	 * Determines if a given method can be called.
 	 *
 	 * @param string $method Name of the method.
@@ -199,31 +172,16 @@ class Object {
 		return Libraries::instance(null, $name, $options);
 	}
 
-	/**
-	 * Gets and caches an array of the parent methods of a class.
-	 *
-	 * @return array Returns an array of parent classes for the current class.
-	 */
-	protected static function _parents() {
-		$class = get_called_class();
-
-		if (!isset(static::$_parents[$class])) {
-			static::$_parents[$class] = class_parents($class);
-		}
-		return static::$_parents[$class];
-	}
-
-	/**
-	 * Exit immediately. Primarily used for overrides during testing.
-	 *
-	 * @param integer|string $status integer range 0 to 254, string printed on exit
-	 * @return void
-	 */
-	protected function _stop($status = 0) {
-		exit($status);
-	}
-
 	/* Deprecated / BC */
+
+	/**
+	 * Parents of the current class.
+	 *
+	 * @deprecated
+	 * @see lithium\core\Object::_parents()
+	 * @var array
+	 */
+	protected static $_parents = [];
 
 	/**
 	 * Contains a 2-dimensional array of filters applied to this object's methods, indexed by method
@@ -235,6 +193,58 @@ class Object {
 	 * @var array
 	 */
 	protected $_methodFilters = [];
+
+	/**
+	 * PHP magic method used in conjunction with `var_export()` to allow objects to be
+	 * re-instantiated with their pre-existing properties and values intact. This method can be
+	 * called statically on any class that extends `Object` to return an instance of it.
+	 *
+	 * @deprecated
+	 * @param array $data An array of properties and values with which to re-instantiate the object.
+	 *        These properties can be both public and protected.
+	 * @return object Returns an instance of the requested object with the given properties set.
+	 */
+	public static function __set_state($data) {
+		$class = get_called_class();
+		$object = new $class();
+
+		foreach ($data as $property => $value) {
+			$object->{$property} = $value;
+		}
+		return $object;
+	}
+
+	/**
+	 * Exit immediately. Primarily used for overrides during testing.
+	 *
+	 * @deprecated
+	 * @param integer|string $status integer range 0 to 254, string printed on exit
+	 * @return void
+	 */
+	protected function _stop($status = 0) {
+		$message  = '`' . __METHOD__ . '()` has been deprecated.';
+		trigger_error($message, E_USER_DEPRECATED);
+		exit($status);
+	}
+
+	/**
+	 * Gets and caches an array of the parent methods of a class.
+	 *
+	 * @deprecated
+	 * @return array Returns an array of parent classes for the current class.
+	 */
+	protected static function _parents() {
+		$message  = '`' . __METHOD__ . '()` has been deprecated. For property merging ';
+		$message .= 'use `\lithium\core\MergeInheritable::_inherit()`';
+		trigger_error($message, E_USER_DEPRECATED);
+
+		$class = get_called_class();
+
+		if (!isset(self::$_parents[$class])) {
+			static::$_parents[$class] = class_parents($class);
+		}
+		return static::$_parents[$class];
+	}
 
 	/**
 	 * Apply a closure to a method of the current object instance.
