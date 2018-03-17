@@ -24,7 +24,7 @@ class StellarController extends \lithium\action\Controller {
                         'publicReceive'=>$pubReceive,
                         'secretReceive'=>$secretReceive,
                 );
-//              $account = Accounts::create()->save($data);
+              $account = Accounts::create()->save($data);
                 return $this->render(array('json'=>array(
                         'public'=>$pub,
                         'secret'=>$secret,
