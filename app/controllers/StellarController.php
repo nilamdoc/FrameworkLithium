@@ -6,7 +6,7 @@ use app\models\Accounts;
 
 
 class StellarController extends \lithium\action\Controller {
-
+ public function _inherit(){}
         public function createAccount(){
 
                 $keypair = Keypair::newFromRandom();
@@ -39,19 +39,21 @@ class StellarController extends \lithium\action\Controller {
 
                 // Use the testnet friendbot to add funds:
                 $response = file_get_contents('https://horizon-testnet.stellar.org/friendbot?addr=' . $publicAccountId);
-
+print_r($response);
                 // After a successful response, the account will have lumens from the testbot
                 if ($response !== false) {
-                        print 'Success! Account is now funded.' . PHP_EOL;
-                        return $this->render(array('json'=>array()));
+                        $funded = 'Success! Account is now funded.';
+                        return $this->render(array('json'=>array('funded'=>$funded)));
                 }
         }
         public function getAccount($pubkey=null){
 
                 $publicAccountId = $pubkey;
                 $server = Server::testNet();
+              print_r($server);
+
                 $account = $server->getAccount($publicAccountId);
-//              print_r($account);
+              print_r($account);
 //              print 'Balances for account ' . $publicAccountId . PHP_EOL;
                 foreach ($account->getBalances() as $balance) {
                 // printf('  Type: %s, Code: %s, Balance: %s' . PHP_EOL,

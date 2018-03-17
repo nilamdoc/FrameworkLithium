@@ -41,9 +41,9 @@ use lithium\aop\Filters;
  * @see lithium\action\Dispatcher
  * @see lithium\action\Controller::$_render
  */
-class Controller extends \lithium\core\Object {
+class Controller extends \lithium\core\BaseObject {
 
-	use \lithium\core\MergeInheritable;
+//	use \lithium\core\MergeInheritable;
 
 	/**
 	 * Contains an instance of the `Request` object with all the details of the HTTP request that

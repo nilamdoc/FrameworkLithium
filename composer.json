@@ -15,7 +15,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=5.5.0",
-        "unionofrad/lithium": "^1.1.1",
+        "unionofrad/lithium": "^1.2.0",
         "zulucrypto/stellar-api":"^0.6.1"
     }
 }
