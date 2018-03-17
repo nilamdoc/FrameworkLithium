@@ -6,7 +6,7 @@ use app\models\Accounts;
 
 
 class StellarController extends \lithium\action\Controller {
- public function _inherit(){}
+// public function _inherit(){}
         public function createAccount(){
 
                 $keypair = Keypair::newFromRandom();
