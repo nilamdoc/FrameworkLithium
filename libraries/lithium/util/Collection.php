@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -75,7 +75,7 @@ namespace lithium\util;
  * @link http://php.net/class.iterator.php PHP Manual: Iterator Interface
  * @link http://php.net/class.countable.php PHP Manual: Countable Interface
  */
-class Collection extends \lithium\core\BaseObject implements \ArrayAccess, \Iterator, \Countable {
+class Collection extends \lithium\core\Object implements \ArrayAccess, \Iterator, \Countable {
 
 	/**
 	 * A central registry of global format handlers for `Collection` objects and subclasses.

@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -209,7 +209,7 @@ class Adaptable extends \lithium\core\StaticObject {
 	/**
 	 * Provides an extension point for modifying how adapters are instantiated.
 	 *
-	 * @see lithium\core\BaseObject::__construct()
+	 * @see lithium\core\Object::__construct()
 	 * @param string $class The fully-namespaced class name of the adapter to instantiate.
 	 * @param array $config The configuration array to be passed to the adapter instance. See the
 	 *              `$config` parameter of `Object::__construct()`.

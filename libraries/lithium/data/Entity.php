@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2010, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -29,7 +29,7 @@ use lithium\analysis\Inspector;
  * @see lithium\template\helper\Form
  * @see lithium\data\Entity::serialize()
  */
-class Entity extends \lithium\core\BaseObject implements \Serializable {
+class Entity extends \lithium\core\Object implements \Serializable {
 
 	/**
 	 * Fully-namespaced class name of model that this record is bound to. Instance methods declared

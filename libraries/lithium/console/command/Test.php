@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -270,9 +270,9 @@ class Test extends \lithium\console\Command {
 	 * This method can be thought of the reverse of `Libraries::path()`.
 	 *
 	 * ```
-	 * lithium/tests/cases/core/ObjectTest.php -> lithium\tests\cases\core\BaseObjectTest
+	 * lithium/tests/cases/core/ObjectTest.php -> lithium\tests\cases\core\ObjectTest
 	 * lithium/tests/cases/core                -> lithium\tests\cases\core
-	 * lithium/core/Object.php                 -> lithium\core\BaseObject
+	 * lithium/core/Object.php                 -> lithium\core\Object
 	 * lithium/core/                           -> lithium\core
 	 * lithium/core                            -> lithium\core
 	 * ```

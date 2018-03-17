@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -16,7 +16,7 @@ use lithium\core\ClassNotFoundException;
  * Basic Http Service.
  *
  */
-class Service extends \lithium\core\BaseObject {
+class Service extends \lithium\core\Object {
 
 	/**
 	 * The `Socket` instance used to send `Service` calls.

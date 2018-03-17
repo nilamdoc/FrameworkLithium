@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -19,6 +19,16 @@ use lithium\tests\mocks\core\MockObjectConfiguration;
 use lithium\tests\mocks\core\MockInstantiator;
 
 class ObjectTest extends \lithium\test\Unit {
+
+	protected $_backup = null;
+
+	public function setUp() {
+		error_reporting(($this->_backup = error_reporting()) & ~E_USER_DEPRECATED);
+	}
+
+	public function tearDown() {
+		error_reporting($this->_backup);
+	}
 
 	/**
 	 * Tests that the correct parameters are always passed in Object::invokeMethod(), regardless of
@@ -75,16 +85,6 @@ class ObjectTest extends \lithium\test\Unit {
 		$this->assertEqual($result['params'], $expected);
 	}
 
-	public function testParents() {
-		$expected = ['lithium\core\BaseObject' => 'lithium\core\BaseObject'];
-
-		$result = MockObjectForParents::parents();
-		$this->assertEqual($expected, $result);
-
-		$result = MockObjectForParents::parents();
-		$this->assertEqual($expected, $result);
-	}
-
 	/**
 	 * Test configuration handling
 	 */
@@ -101,19 +101,6 @@ class ObjectTest extends \lithium\test\Unit {
 			'testScalar', 'testArray' => 'merge'
 		]] + $expected);
 		$this->assertEqual($expected, $config->getConfig());
-	}
-
-	/**
-	 * Tests that an object can be instantiated using the magic `__set_state()` method.
-	 */
-	public function testStateBasedInstantiation() {
-		$result = MockObjectConfiguration::__set_state([
-			'key' => 'value', '_protected' => 'test'
-		]);
-		$expected = 'lithium\tests\mocks\core\MockObjectConfiguration';
-		$this->assertEqual($expected, get_class($result));
-
-		$this->assertEqual('test', $result->getProtected());
 	}
 
 	public function testInstanceWithClassesKey() {
@@ -158,6 +145,31 @@ class ObjectTest extends \lithium\test\Unit {
 	}
 
 	/* Deprecated / BC */
+
+	public function testParents() {
+		$expected = ['lithium\core\Object' => 'lithium\core\Object'];
+
+		$result = MockObjectForParents::parents();
+		$this->assertEqual($expected, $result);
+
+		$result = MockObjectForParents::parents();
+		$this->assertEqual($expected, $result);
+	}
+
+	/**
+	 * Tests that an object can be instantiated using the magic `__set_state()` method.
+	 *
+	 * @deprecated
+	 */
+	public function testStateBasedInstantiation() {
+		$result = MockObjectConfiguration::__set_state([
+			'key' => 'value', '_protected' => 'test'
+		]);
+		$expected = 'lithium\tests\mocks\core\MockObjectConfiguration';
+		$this->assertEqual($expected, get_class($result));
+
+		$this->assertEqual('test', $result->getProtected());
+	}
 
 	public function testMethodFiltering() {
 		error_reporting(($original = error_reporting()) & ~E_USER_DEPRECATED);

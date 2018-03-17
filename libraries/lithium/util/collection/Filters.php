@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -75,9 +75,9 @@ use lithium\aop\Filters as NewFilters;
  * @deprecated Replaced by `\lithium\aop\Filters` and `\lithium\aop\Chain`.
  * @link http://php.net/functions.anonymous.php
  * @see lithium\util\collection\Filters::run()
- * @see lithium\core\BaseObject::_filter()
+ * @see lithium\core\Object::_filter()
  * @see lithium\core\StaticObject::_filter()
- * @see lithium\core\BaseObject::applyFilter()
+ * @see lithium\core\Object::applyFilter()
  * @see lithium\core\StaticObject::applyFilter()
  */
 class Filters extends \lithium\util\Collection {
@@ -207,8 +207,8 @@ class Filters extends \lithium\util\Collection {
 	 * Provides short-hand convenience syntax for filter chaining.
 	 *
 	 * @deprecated Not used here anymore.
-	 * @see lithium\core\BaseObject::applyFilter()
-	 * @see lithium\core\BaseObject::_filter()
+	 * @see lithium\core\Object::applyFilter()
+	 * @see lithium\core\Object::_filter()
 	 * @param object $self The object instance that owns the filtered method.
 	 * @param array $params An associative array containing the parameters passed to the filtered
 	 *              method.

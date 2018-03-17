@@ -2,7 +2,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2016, Union of RAD. All rights reserved. This source
+ * Copyright 2009, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -17,16 +17,10 @@ use lithium\analysis\Inspector;
  * Provides a base class for all static classes in the Lithium framework. Similar to its
  * counterpart, the `Object` class, `StaticObject` defines some utility useful for testing purposes.
  *
- * @see lithium\core\BaseObject
+ * @see lithium\core\Object
  */
 class StaticObject {
 
-	/**
-	 * Keeps a cached list of each class' inheritance tree.
-	 *
-	 * @var array
-	 */
-	protected static $_parents = [];
 
 	/**
 	 * Calls a method on this object with the given parameters. Provides an OO wrapper for
@@ -85,31 +79,15 @@ class StaticObject {
 		return Libraries::instance(null, $name, $options);
 	}
 
-	/**
-	 * Gets and caches an array of the parent methods of a class.
-	 *
-	 * @return array Returns an array of parent classes for the current class.
-	 */
-	protected static function _parents() {
-		$class = get_called_class();
-
-		if (!isset(static::$_parents[$class])) {
-			static::$_parents[$class] = class_parents($class);
-		}
-		return static::$_parents[$class];
-	}
-
-	/**
-	 * Exit immediately. Primarily used for overrides during testing.
-	 *
-	 * @param integer|string $status integer range 0 to 254, string printed on exit
-	 * @return void
-	 */
-	protected static function _stop($status = 0) {
-		exit($status);
-	}
-
 	/* Deprecated / BC */
+
+	/**
+	 * Keeps a cached list of each class' inheritance tree.
+	 *
+	 * @deprecated
+	 * @var array
+	 */
+	protected static $_parents = [];
 
 	/**
 	 * Stores the closures that represent the method filters. They are indexed by called class.
@@ -118,6 +96,38 @@ class StaticObject {
 	 * @var array Method filters, indexed by `get_called_class()`.
 	 */
 	protected static $_methodFilters = [];
+
+	/**
+	 * Exit immediately. Primarily used for overrides during testing.
+	 *
+	 * @deprecated
+	 * @param integer|string $status integer range 0 to 254, string printed on exit
+	 * @return void
+	 */
+	protected static function _stop($status = 0) {
+		$message  = '`' . __METHOD__ . '()` has been deprecated.';
+		trigger_error($message, E_USER_DEPRECATED);
+		exit($status);
+	}
+
+	/**
+	 * Gets and caches an array of the parent methods of a class.
+	 *
+	 * @deprecated
+	 * @return array Returns an array of parent classes for the current class.
+	 */
+	protected static function _parents() {
+		$message  = '`' . __METHOD__ . '()` has been deprecated. For property merging ';
+		$message .= 'use `\lithium\core\MergeInheritable::_inherit()`';
+		trigger_error($message, E_USER_DEPRECATED);
+
+		$class = get_called_class();
+
+		if (!isset(self::$_parents[$class])) {
+			static::$_parents[$class] = class_parents($class);
+		}
+		return static::$_parents[$class];
+	}
 
 	/**
 	 * Apply a closure to a method of the current static object.
