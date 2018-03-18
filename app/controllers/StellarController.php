@@ -3,8 +3,6 @@ namespace app\controllers;
 
 use ZuluCrypto\StellarSdk\Keypair;
 use ZuluCrypto\StellarSdk\Server;
-use ZuluCrypto\StellarSdk\Keypair;
-use ZuluCrypto\StellarSdk\Server;
 use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
 
 use app\models\Accounts;
@@ -74,7 +72,7 @@ class StellarController extends \lithium\action\Controller {
   );
   return compact('data');
  }
- public function transaction(){
+ public function transactions(){
   if($this->request->data){
   $server = Server::testNet();
 
@@ -109,7 +107,7 @@ class StellarController extends \lithium\action\Controller {
  $accounts = Accounts::find('all');
  $accountData = array();
  foreach ($accounts as $account){
-  array_push($accountData, $this->getAccount($account['public'])
+  array_push($accountData, $this->getAccount($account['public']));
  }
  return compact('accountData');
  
