@@ -10,7 +10,7 @@ use lithium\data\Connections;
 	'login' => CONNECTION_USER,
 	'password' => CONNECTION_PASS,	
 //	'setSlaveOkay' => true,
-//	'readPreference' => Mongo::RP_NEAREST 
+	'readPreference' => SMALLEST_MAX_STALENESS_SECONDS 
  ));
 
 ?>
