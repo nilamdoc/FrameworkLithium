@@ -59,7 +59,7 @@ class StellarController extends \lithium\action\Controller {
   $publicAccountId = $pubkey;
   $server = Server::testNet();
   $account = $server->getAccount($publicAccountId);
-  if(is_array($account->getBalances())){
+  if($account){
    foreach ($account->getBalances() as $balance) {
     $type = $balance->getAssetType();
     $code = $balance->getAssetCode();
