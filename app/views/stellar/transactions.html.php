@@ -23,7 +23,7 @@
  <?=$data['data']['code']?>
  </td>
   <td>
- <?=$data['data']['balance']?>
+ <?=number_format($data['data']['balance'],7)?>
  </td>
 </tr>
 <?php $i++;} ?>
