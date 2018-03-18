@@ -17,3 +17,6 @@
 <?php $i++;} ?>
 </table>
 </div>
+<form method="post">
+ <button type="submit" class="btn btn-primary">Create new account</button>
+</form>
