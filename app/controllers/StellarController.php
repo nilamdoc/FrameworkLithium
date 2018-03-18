@@ -59,17 +59,25 @@ class StellarController extends \lithium\action\Controller {
   $publicAccountId = $pubkey;
   $server = Server::testNet();
   $account = $server->getAccount($publicAccountId);
-  foreach ($account->getBalances() as $balance) {
-   $type = $balance->getAssetType();
-   $code = $balance->getAssetCode();
-   $balance =      $balance->getBalance();
+  if(is_array($account->getBalances())){
+   foreach ($account->getBalances() as $balance) {
+    $type = $balance->getAssetType();
+    $code = $balance->getAssetCode();
+    $balance =      $balance->getBalance();
+   }
+   $data = array(
+    'account'=>$publicAccountId,
+    'type'=>$type,
+    'code'=>$code,
+    'balance'=>$balance
+   ); 
+  }else{
+   $data = array(
+    'account'=>$publicAccountId
+   );
+   
   }
-  $data = array(
-   'account'=>$publicAccountId,
-   'type'=>$type,
-   'code'=>$code,
-   'balance'=>$balance
-  );
+  
   return compact('data');
  }
  public function transactions(){
