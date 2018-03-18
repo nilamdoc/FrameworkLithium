@@ -73,7 +73,7 @@ class StellarController extends \lithium\action\Controller {
    ); 
   }else{
    $data = array(
-    'account'=>$publicAccountId
+    'account'=>$publicAccountId,
     'type'=>'Native',
     'code'=>'XLM',
     'balance'=>0
