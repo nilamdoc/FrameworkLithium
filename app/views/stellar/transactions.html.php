@@ -22,7 +22,7 @@
   <td>
  <?=$data['data']['code']?>
  </td>
-  <td>
+  <td class="pull-right">
  <?=number_format($data['data']['balance'],7)?>
  </td>
 </tr>
