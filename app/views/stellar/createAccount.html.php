@@ -10,13 +10,13 @@
 </thead>
 <?php $i=1;foreach($accounts as $account){?>
 <tr>
- <td><?=$i?>
-<td>
-<code><?php  print_r($account['public']); ?></code>
-</td>
-<td>
- <a href="/stellar/fundAccount/<?=$account['public']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Fund Account</a>
-</td>
+ <td><?=$i?></td>
+ <td>
+ <code><?php  print_r($account['public']); ?></code>
+ </td>
+ <td>
+  <a href="/stellar/fundAccount/<?=$account['public']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Fund Account</a>
+ </td>
 </tr>
 <?php $i++;} ?>
 </table>

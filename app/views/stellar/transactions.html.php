@@ -10,11 +10,23 @@
  <th>Balance</th>
 </tr> 
 </thead>
-<?php
-foreach($accountData as $data){
- var_dump($data);
-}
-?>
+<?php $i = 1; foreach($accountData as $data){?>
+<tr>
+ <td><?=$i?></td>
+ <td>
+ <code><?=$data['data']['account']?></code>
+ </td>
+ <td>
+ <?=$data['data']['type']?>
+ </td>
+  <td>
+ <?=$data['data']['code']?>
+ </td>
+  <td>
+ <?=$data['data']['balance']?>
+ </td>
+</tr>
+<?php } ?>
 
 </table>
 </div>
