@@ -311,6 +311,8 @@ class MongoDb extends \lithium\data\Source {
 		$notNull = function($value){
 			return $value !== null;
 		};
+  print_r($this->_config['uriOptions']);
+  
 		$uriOptions = array_filter($this->_config['uriOptions'], $notNull);
 		$driverOptions = array_filter($this->_config['driverOptions'], $notNull);
 		$this->server = new $server($this->_config['dsn'], $uriOptions, $driverOptions);
