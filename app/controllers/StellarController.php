@@ -36,40 +36,39 @@ class StellarController extends \lithium\action\Controller {
   // )));
 }
  public function fundAccount($pubkey=null){
-        // See 01-create-account.php for where this was generated
-                $publicAccountId = $pubkey;
+ // See 01-create-account.php for where this was generated
+  $publicAccountId = $pubkey;
 
-                // Use the testnet friendbot to add funds:
-                $response = file_get_contents('https://horizon-testnet.stellar.org/friendbot?addr=' . $publicAccountId);
+  // Use the testnet friendbot to add funds:
+  $response = file_get_contents('https://horizon-testnet.stellar.org/friendbot?addr=' . $publicAccountId);
 
-                // After a successful response, the account will have lumens from the testbot
-                if ($response !== false) {
-                        $funded = 'Success! Account is now funded.';
-                        return $this->render(array('json'=>array('funded'=>$funded,'response'=>$response)));
-                }
-        }
-        public function getAccount($pubkey=null){
-
-                $publicAccountId = $pubkey;
-                $server = Server::testNet();
-//              print_r($server);
-
-                $account = $server->getAccount($publicAccountId);
-//              print_r($account);
-//              print 'Balances for account ' . $publicAccountId . PHP_EOL;
-                foreach ($account->getBalances() as $balance) {
-                // printf('  Type: %s, Code: %s, Balance: %s' . PHP_EOL,
-                $type = $balance->getAssetType();
-                $code = $balance->getAssetCode();
-                $balance =      $balance->getBalance();
-                }
-        return $this->render(array('json'=>array(
-                'account'=>$publicAccountId,
-                'type'=>$type,
-                'code'=>$code,
-                'balance'=>$balance
-        )));
-        }
+  // After a successful response, the account will have lumens from the testbot
+  if ($response !== false) {
+   $funded = 'Success! Account is now funded.';
+   return compact('pubkey','funded');
+   //return $this->render(array('json'=>array('funded'=>$funded,'response'=>$response)));
+  }else{
+   $funded = 'Error! Unable to fund account at this time, try again.';
+   return compact('pubkey','funded');
+  }
+ }
+ public function getAccount($pubkey=null){
+  $publicAccountId = $pubkey;
+  $server = Server::testNet();
+  $account = $server->getAccount($publicAccountId);
+  foreach ($account->getBalances() as $balance) {
+   $type = $balance->getAssetType();
+   $code = $balance->getAssetCode();
+   $balance =      $balance->getBalance();
+  }
+  $data = array(
+   'account'=>$publicAccountId,
+   'type'=>$type,
+   'code'=>$code,
+   'balance'=>$balance
+  );
+  return compact('data');
+ }
 
 }
 
