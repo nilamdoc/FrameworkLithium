@@ -117,7 +117,7 @@ class Exporter extends \lithium\core\StaticObject {
 				'handlers' => [
     'MongoDB\BSON\UTCDateTime' => function($value) { return $value; },
     'MongoDB\BSON\ObjectID' => function($value) { return $value; }
-			];
+			]];
 
 			if ($isArray) {
 				$newValue = $value->to('array', $options);
