@@ -6,34 +6,36 @@ use app\models\Accounts;
 
 
 class StellarController extends \lithium\action\Controller {
-        public function _inherit(){}
-        public function createAccount(){
+ public function _inherit(){}
+ public function createAccount(){
+ if($this->request->data){
+  $keypair = Keypair::newFromRandom();
+  $keypairReceive = Keypair::newFromRandom();
 
-                $keypair = Keypair::newFromRandom();
-                $keypairReceive = Keypair::newFromRandom();
-
-                $secret = $keypair->getSecret() ;
-                $secretReceive = $keypairReceive->getSecret() ;
-                // SAV76USXIJOBMEQXPANUOQM6F5LIOTLPDIDVRJBFFE2MDJXG24TAPUU7
-                $pub = $keypair->getPublicKey() ;
-                $pubReceive = $keypairReceive->getPublicKey() ;
-                // GCFXHS4GXL6BVUCXBWXGTITROWLVYXQKQLF4YH5O5JT3YZXCYPAFBJZB
-                $data = array(
-                        'public'=>$pub,
-                        'secret'=>$secret,
-                        'publicReceive'=>$pubReceive,
-                        'secretReceive'=>$secretReceive,
-                );
-              $account = Accounts::create()->save($data);
-                return $this->render(array('json'=>array(
-                        'public'=>$pub,
-                        'secret'=>$secret,
-                        'publicReceive'=>$pubReceive,
-                        'secretReceive'=>$secretReceive,
-
-                )));
-        }
-        public function fundAccount($pubkey=null){
+  $secret = $keypair->getSecret() ;
+  $secretReceive = $keypairReceive->getSecret() ;
+  // SAV76USXIJOBMEQXPANUOQM6F5LIOTLPDIDVRJBFFE2MDJXG24TAPUU7
+  $pub = $keypair->getPublicKey() ;
+  $pubReceive = $keypairReceive->getPublicKey() ;
+  // GCFXHS4GXL6BVUCXBWXGTITROWLVYXQKQLF4YH5O5JT3YZXCYPAFBJZB
+  $data = array(
+   'public'=>$pub,
+   'secret'=>$secret,
+   'publicReceive'=>$pubReceive,
+   'secretReceive'=>$secretReceive,
+  );
+  $account = Accounts::create()->save($data);
+ }
+ $accounts = Accounts::find('all');
+ return compact('accounts');
+  // return $this->render(array('json'=>array(
+   // 'public'=>$pub,
+   // 'secret'=>$secret,
+   // 'publicReceive'=>$pubReceive,
+   // 'secretReceive'=>$secretReceive,
+  // )));
+}
+ public function fundAccount($pubkey=null){
         // See 01-create-account.php for where this was generated
                 $publicAccountId = $pubkey;
 

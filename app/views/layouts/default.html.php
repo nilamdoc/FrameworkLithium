@@ -1,55 +1,22 @@
-<?php
-/**
- * li₃: the most RAD framework for PHP (http://li3.me)
- *
- * Copyright 2016, Union of RAD. All rights reserved. This source
- * code is distributed under the terms of the BSD 3-Clause License.
- * The full license text can be found in the LICENSE.txt file.
- */
-?>
 <!doctype html>
 <html>
 <head>
 	<?php echo $this->html->charset();?>
 	<title>Application &gt; <?php echo $this->title(); ?></title>
-	<?php echo $this->html->style(['bootstrap.min', 'lithified']); ?>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<?php echo $this->scripts(); ?>
 	<?php echo $this->styles(); ?>
 	<?php echo $this->html->link('Icon', null, ['type' => 'icon']); ?>
 </head>
-<body class="lithified">
-	<div class="container-narrow">
-
-		<div class="masthead">
-			<ul class="nav nav-pills pull-right">
-				<li>
-					<a href="http://li3.me/docs/book/manual/1.x/quickstart">Quickstart</a>
-				</li>
-				<li>
-					<a href="http://li3.me/docs/book/manual/1.x/">Manual</a>
-				</li>
-				<li>
-					<a href="http://li3.me/docs/api/lithium/1.1.x/lithium">API</a>
-				</li>
-				<li>
-					<a href="http://li3.me/">More</a>
-				</li>
-			</ul>
-			<a href="http://li3.me/"><h3>&#10177;</h3></a>
-		</div>
-
-		<hr>
-
+<body class="">
+  <?php echo $this->_render('element', 'header');?>
 		<div class="content">
 			<?php echo $this->content(); ?>
 		</div>
-
 		<hr>
-
-		<div class="footer">
-			<p>&copy; Union Of RAD <?php echo date('Y') ?></p>
-		</div>
-
+  <?php echo $this->_render('element', 'footer');?>
 	</div>
 </body>
-</html>
