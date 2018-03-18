@@ -17,7 +17,7 @@
  <code><?=$data['data']['account']?></code>
  </td>
  <td>
- <?=$data['data']['type']?>
+ <?=ucwords(strtolower($data['data']['type']))?>
  </td>
   <td>
  <?=$data['data']['code']?>
@@ -26,7 +26,7 @@
  <?=$data['data']['balance']?>
  </td>
 </tr>
-<?php } ?>
+<?php $i++;} ?>
 
 </table>
 </div>
