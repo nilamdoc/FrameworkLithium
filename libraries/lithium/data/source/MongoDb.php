@@ -315,6 +315,7 @@ class MongoDb extends \lithium\data\Source {
   
 		$uriOptions = array_filter($this->_config['uriOptions'], $notNull);
 		$driverOptions = array_filter($this->_config['driverOptions'], $notNull);
+  var_dump($uriOptions);
 		$this->server = new $server($this->_config['dsn'], $uriOptions, $driverOptions);
 
 		$this->_operators += [
