@@ -3,7 +3,7 @@
 /**
  * li₃: the most RAD framework for PHP (http://li3.me)
  *
- * Copyright 2012, Union of RAD. All rights reserved. This source
+ * Copyright 2016, Union of RAD. All rights reserved. This source
  * code is distributed under the terms of the BSD 3-Clause License.
  * The full license text can be found in the LICENSE.txt file.
  */
@@ -12,9 +12,6 @@
 
 foreach (explode(' ', getenv('PHP_EXT')) ?: [] as $extension) {
 	PhpExtensions::install($extension);
-}
-foreach (explode(' ', getenv('COMPOSER_PKG')) ?: [] as $package) {
-	ComposerPackages::install($package);
 }
 
 /**
@@ -62,9 +59,9 @@ class PhpExtensions {
 	protected static function _apcu() {
 		if (!static::_isHhvm()) {
 			if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
-				static::_pecl('apcu', '5.1.8', true);
+				static::_pecl('apcu', '5.1.5', true);
 			} else {
-				static::_pecl('apcu', '4.0.11', true);
+				static::_pecl('apcu', '5.1.2', true);
 			}
 			// static::_ini(['extension=apcu.so']);
 		}
@@ -104,6 +101,10 @@ class PhpExtensions {
 	}
 
 	protected static function _mongodb() {
+		if (static::_isHhvm()) {
+			throw new RuntimeException("`mongodb` cannot be used with HHVM.");
+		}
+		static::_pecl('mongodb');
 		static::_ini(['extension=mongodb.so']);
 	}
 
@@ -195,22 +196,6 @@ class PhpExtensions {
 
 	protected static function _isHhvm() {
 		return defined('HHVM_VERSION');
-	}
-}
-
-/**
- * Allows to install composer packages into the test environment.
- */
-class ComposerPackages {
-
-	public static function install($package) {
-		$return = 0;
-		system($command = "composer require {$package}", $return);
-
-		if (0 !== $return) {
-			printf("=> Command '%s' failed !", $command);
-			exit($return);
-		}
 	}
 }
 
