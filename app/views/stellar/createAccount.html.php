@@ -12,4 +12,5 @@
 </td>
 </tr>
 <?php $i++;} ?>
+</table>
 </div>
