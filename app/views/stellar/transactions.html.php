@@ -11,7 +11,9 @@
 </tr> 
 </thead>
 <?php
-print_r($accountData);
+foreach($accountData as $data){
+ var_dump($data);
+}
 ?>
 
 </table>
