@@ -14,7 +14,10 @@
 <tr>
  <td><?=$i?></td>
  <td>
- <code><?=$data['data']['account']?></code>
+ <code><?=$data['data']['account']?></code>&nbsp;
+ <?php if($data['data']['balance']>0){?>
+ <a href="/stellar/transfer/<?=$account['public']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Send Coins</a>
+ <?php }?>
  </td>
  <td>
  <?=ucwords(strtolower($data['data']['type']))?>
