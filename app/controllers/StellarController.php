@@ -50,7 +50,7 @@ class StellarController extends \lithium\action\Controller {
 
                 $publicAccountId = $pubkey;
                 $server = Server::testNet();
-//              print_r($server);
+              print_r($server);
 
                 $account = $server->getAccount($publicAccountId);
               print_r($account);
