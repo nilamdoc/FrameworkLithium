@@ -59,7 +59,7 @@
 </div>
 
 <?php 
-if($response){
+if(!is_null( $response)){
 var_dump($response);
 }
 ?>
