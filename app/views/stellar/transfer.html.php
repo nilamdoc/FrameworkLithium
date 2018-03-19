@@ -59,5 +59,7 @@
 </div>
 
 <?php 
+if($response){
 var_dump($response);
+}
 ?>
