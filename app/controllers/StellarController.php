@@ -115,11 +115,14 @@ class StellarController extends \lithium\action\Controller {
    // GAHC2HBHXSRNUT5S3BMKMUMTR3IIHVCARBFAX256NONXYKY65R2C5267
    // You may need to fund this account if the testnet has been reset:
    // https://www.stellar.org/laboratory/#account-creator?network=test
+   
    $sourceKeypair = Keypair::newFromSeed($secret);
+   $funded = $this->fundAccount($this->request->data['sendTo']);
    $destinationAccountId = $this->request->data['sendTo'];
 
    // Verify that the destination account exists. This will throw an exception
    // if it does not
+   
    $destinationAccount = $server->getAccount($destinationAccountId);
 
    // Build the payment transaction
