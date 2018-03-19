@@ -27,6 +27,7 @@
 </tr>
 </table>
 <form method="post">
+<input type="hidden" name"sendFrom" value="<?=$pubkey?>">
  <div class="row">
   <div class="form-group col-md-6">
   <label for="sendTo">Select to send coins</label>
@@ -43,6 +44,11 @@
     <small id="amountHelp" class="form-text text-muted">How much XLM you would like to send, <strong>maximum <?=number_format($account['data']['balance'],7)?></strong>.</small>
   </div>
  </div>
+ <div class="row">
+ <div class="form-group col-md-6">
+ <button type="submit" name="submit" class="btn btn-primary">Create new account</button>
+ </div>
+ </div>
 </form>
 </div>
 
@@ -51,3 +57,7 @@
  <a href="/stellar/createAccount/" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">List Accounts</a>
  </form>
 </div>
+
+<?php 
+var_dump($response);
+?>

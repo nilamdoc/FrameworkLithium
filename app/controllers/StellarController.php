@@ -100,17 +100,23 @@ class StellarController extends \lithium\action\Controller {
    $secret = $pair['secret'];
    $account = $this->getAccount($pubkey);
    $conditions = array('public'=>array('$ne'=>$pubkey));
-   $others = Accounts::find('all',array(
-    'conditions'=>$conditions
-   ));
+   
  if($this->request->data){
    $server = Server::testNet();
+   $conditions = array('public'=>$this->request->data['sendFrom']);
 
+   $pair = Accounts::find('first', array(
+    'conditions'=>$conditions
+   ));
+   $secret = $pair['secret'];
+   $pubkey = $pair['public'];
+   $account = $this->getAccount($pubkey);
+   
    // GAHC2HBHXSRNUT5S3BMKMUMTR3IIHVCARBFAX256NONXYKY65R2C5267
    // You may need to fund this account if the testnet has been reset:
    // https://www.stellar.org/laboratory/#account-creator?network=test
    $sourceKeypair = Keypair::newFromSeed($secret);
-   $destinationAccountId = 'GA2C5RFPE6GCKMY3US5PAB6UZLKIGSPIUKSLRB6Q723BM2OARMDUYEJ5';
+   $destinationAccountId = $this->request->data['sendTo'];
 
    // Verify that the destination account exists. This will throw an exception
    // if it does not
@@ -120,18 +126,16 @@ class StellarController extends \lithium\action\Controller {
    $transaction = \ZuluCrypto\StellarSdk\Server::testNet()
        ->buildTransaction($sourceKeypair->getPublicKey())
        ->addOperation(
-           PaymentOp::newNativePayment($destinationAccountId, 1)
+           PaymentOp::newNativePayment($destinationAccountId, $this->request->data['amount'])
        )
    ;
 
    // Sign and submit the transaction
    $response = $transaction->submit($sourceKeypair->getSecret());
-
-   print "Response:" . PHP_EOL;
-   print_r($response->getRawData());
-
-   print PHP_EOL;
-   print 'Payment succeeded!' . PHP_EOL;
+   $others = Accounts::find('all',array(
+    'conditions'=>$conditions
+   ));
+   return compact('response','pubkey','account','others');
   }
   return compact('pubkey','account','others');
  }
