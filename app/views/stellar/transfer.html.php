@@ -14,25 +14,26 @@
 <tr>
  <td><?=$i?></td>
  <td>
- <code><?=$data['data']['account']?></code>&nbsp;
+ <code><?=$pubkey?></code>&nbsp;
  <?php if($data['data']['balance']>0){?>
- <a href="/stellar/transfer/<?=$data['data']['account']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Send Coins</a>
+ <a href="/stellar/transfer/<?=$account['data']['account']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Send Coins</a>
  <?php }?>
  </td>
  <td>
- <?=ucwords(strtolower($data['data']['type']))?>
+ <?=ucwords(strtolower($account['data']['type']))?>
  </td>
   <td>
- <?=$data['data']['code']?>
+ <?=$account['data']['code']?>
  </td>
   <td class="text-right">
- <?=number_format($data['data']['balance'],7)?>
+ <?=number_format($account['data']['balance'],7)?>
  </td>
 </tr>
 <?php $i++;} ?>
 
 </table>
 </div>
+
 <div class="container">
 <form method="post">
  <a href="/stellar/createAccount/" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">List Accounts</a>

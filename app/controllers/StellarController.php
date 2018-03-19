@@ -98,7 +98,7 @@ class StellarController extends \lithium\action\Controller {
     'conditions'=>$conditions
    ));
    $secret = $pair['secret'];
-   print_r($secret);
+   $account = $this->getAccount($pubkey);
  if($this->request->data){
    $server = Server::testNet();
 
@@ -129,7 +129,7 @@ class StellarController extends \lithium\action\Controller {
    print PHP_EOL;
    print 'Payment succeeded!' . PHP_EOL;
   }
-  return compact('pubkey');
+  return compact('pubkey','account');
  }
  
 }
