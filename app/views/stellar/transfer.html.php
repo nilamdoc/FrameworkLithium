@@ -14,7 +14,6 @@
  <td>1</td>
  <td>
  <code><?=$pubkey?></code>&nbsp;
- <a href="/stellar/transfer/<?=$account['data']['account']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Send Coins</a>
  </td>
  <td>
  <?=ucwords(strtolower($account['data']['type']))?>
@@ -26,8 +25,12 @@
  <?=number_format($account['data']['balance'],7)?>
  </td>
 </tr>
-
 </table>
+<form method="post">
+ <?php foreach($others as $o){?>
+  <?=$o['public']?>
+ <?php }?>
+</form>
 </div>
 
 <div class="container">
