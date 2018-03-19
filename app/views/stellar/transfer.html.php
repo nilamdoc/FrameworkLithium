@@ -10,9 +10,8 @@
  <th>Balance</th>
 </tr> 
 </thead>
-<?php $i = 1; foreach($accountData as $data){?>
 <tr>
- <td><?=$i?></td>
+ <td>1</td>
  <td>
  <code><?=$pubkey?></code>&nbsp;
  <?php if($data['data']['balance']>0){?>
@@ -29,7 +28,6 @@
  <?=number_format($account['data']['balance'],7)?>
  </td>
 </tr>
-<?php $i++;} ?>
 
 </table>
 </div>
