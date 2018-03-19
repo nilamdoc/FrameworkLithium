@@ -27,13 +27,22 @@
 </tr>
 </table>
 <form method="post">
-<label for="sendTo">Select to send coins</label>
-<select id="sendTo"  name="sendTo" class="form-control">
- <option selected>Choose...</option>
- <?php foreach($others as $o){?>
- <option value="<?=$o['public']?>"><?=$o['public']?></option>
- <?php }?>
-</select>
+ <div class="row">
+  <div class="form-group col-md-6">
+  <label for="sendTo">Select to send coins</label>
+  <select id="sendTo"  name="sendTo" class="form-control">
+   <option selected>Choose...</option>
+   <?php foreach($others as $o){?>
+   <option value="<?=$o['public']?>"><?=$o['public']?></option>
+   <?php }?>
+  </select>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="amount">Amount</label>
+    <input type="text" class="form-control" id="amount" name="amount" aria-describedby="amountHelp" placeholder="10">
+    <small id="amountHelp" class="form-text text-muted">How much XLM you would like to send, <strong>maximum <?=number_format($account['data']['balance'],7)?></strong>.</small>
+  </div>
+ </div>
 </form>
 </div>
 
