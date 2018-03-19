@@ -27,9 +27,13 @@
 </tr>
 </table>
 <form method="post">
+<label for="sendTo">Select to send coins</label>
+<select id="sendTo"  name="sendTo" class="form-control">
+ <option selected>Choose...</option>
  <?php foreach($others as $o){?>
-  <?=$o['public']?>
+ <option value="<?=$o['public']?>"><?=$o['public']?></option>
  <?php }?>
+</select>
 </form>
 </div>
 
