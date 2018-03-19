@@ -92,7 +92,7 @@ class StellarController extends \lithium\action\Controller {
   return compact('accountData');
  }
 
- public function tranfer($pubkey){
+ public function transfer($pubkey){
   if($this->request->data){
    $server = Server::testNet();
    $conditions = array('public'=>$pubkey);
