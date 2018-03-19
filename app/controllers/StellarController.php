@@ -135,8 +135,12 @@ class StellarController extends \lithium\action\Controller {
    $others = Accounts::find('all',array(
     'conditions'=>$conditions
    ));
+   
    return compact('response','pubkey','account','others');
   }
+  $others = Accounts::find('all',array(
+    'conditions'=>$conditions
+   ));
   return compact('pubkey','account','others');
  }
  

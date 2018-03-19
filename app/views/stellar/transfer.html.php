@@ -46,7 +46,7 @@
  </div>
  <div class="row">
  <div class="form-group col-md-6">
- <button type="submit" name="submit" class="btn btn-primary">Create new account</button>
+ <button type="submit" name="submit" class="btn btn-primary">Transfer</button>
  </div>
  </div>
 </form>
