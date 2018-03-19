@@ -93,13 +93,15 @@ class StellarController extends \lithium\action\Controller {
  }
 
  public function transfer($pubkey){
-  if($this->request->data){
-   $server = Server::testNet();
    $conditions = array('public'=>$pubkey);
    $pair = Accounts::find('first', array(
     'conditions'=>$conditions
    ));
    $secret = $pair['secret'];
+   print_r($secret);
+ if($this->request->data){
+   $server = Server::testNet();
+
    // GAHC2HBHXSRNUT5S3BMKMUMTR3IIHVCARBFAX256NONXYKY65R2C5267
    // You may need to fund this account if the testnet has been reset:
    // https://www.stellar.org/laboratory/#account-creator?network=test
@@ -128,5 +130,5 @@ class StellarController extends \lithium\action\Controller {
    print 'Payment succeeded!' . PHP_EOL;
   }
  }
- 
+ return compact('pubkey');
 }
