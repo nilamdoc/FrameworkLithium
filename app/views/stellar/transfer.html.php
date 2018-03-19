@@ -27,7 +27,7 @@
 </tr>
 </table>
 <form method="post">
-<input type="hidden" name"sendFrom" value="<?=$pubkey?>">
+<input type="hidden" name="sendFrom" value="<?=$pubkey?>">
  <div class="row">
   <div class="form-group col-md-6">
   <label for="sendTo">Select to send coins</label>
