@@ -129,6 +129,7 @@ class StellarController extends \lithium\action\Controller {
    print PHP_EOL;
    print 'Payment succeeded!' . PHP_EOL;
   }
+  return compact('pubkey');
  }
- return compact('pubkey');
+ 
 }
