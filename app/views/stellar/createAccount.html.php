@@ -31,7 +31,7 @@
  <code><?php  print_r($account['accounts']['public']); ?></code>
  </td>
  <td>
-  <a href="/stellar/fundAccount/<?=$account['account']['public']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Fund Account</a>
+  <a href="/stellar/fundAccount/<?=$account['accounts']['public']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Fund Account</a>
  </td>
 </tr>
 <?php $i++;} ?>
