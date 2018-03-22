@@ -29,6 +29,9 @@
   </div>
   <div class=" col field">
   <button type="submit" name="submit" class="btn btn-outline-success">Login</button>
+  </br>Still not registered!
+   <a href="/user/register/" class="btn btn-outline-success " role="button" aria-pressed="true">Register</a>&nbsp;&nbsp;
+
   </div>
  </div>
  
