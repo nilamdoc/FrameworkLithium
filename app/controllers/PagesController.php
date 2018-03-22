@@ -26,7 +26,10 @@ namespace app\controllers;
  * `/views/pages/about/company.html.php`.
  */
 class PagesController extends \lithium\action\Controller {
- public function _inherit(){}
+ public function _inherit(){
+  
+  
+ }
 
 	public function view() {
 		$options = [];

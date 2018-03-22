@@ -1,6 +1,9 @@
 <?php
 namespace app\controllers;
 
+use lithium\storage\Session;
+use app\models\Users;
+
 use ZuluCrypto\StellarSdk\Keypair;
 use ZuluCrypto\StellarSdk\Server;
 use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
@@ -10,7 +13,18 @@ use app\models\Accounts;
 
 class StellarController extends \lithium\action\Controller {
  public function _inherit(){}
+ public function account(){
+  
+ }
  public function createAccount(){
+ $user = Session::read('default');
+ $conditions = array(
+  'email'=>strtolower($user['email']),
+//  'secret'=>$user['secret']
+ );
+ $user = Users::find('first',array(
+  'conditions'=>$conditions
+ ));  
  if($this->request->data){
   $keypair = Keypair::newFromRandom();
   $keypairReceive = Keypair::newFromRandom();
@@ -21,16 +35,22 @@ class StellarController extends \lithium\action\Controller {
   $pub = $keypair->getPublicKey() ;
   $pubReceive = $keypairReceive->getPublicKey() ;
   // GCFXHS4GXL6BVUCXBWXGTITROWLVYXQKQLF4YH5O5JT3YZXCYPAFBJZB
+ 
   $data = array(
-   'public'=>$pub,
-   'secret'=>$secret,
-   'publicReceive'=>$pubReceive,
-   'secretReceive'=>$secretReceive,
+   'secret'=>$user['secret'],
+   'accounts.public'=>$pub,
+   'accounts.secret'=>$secret,
   );
   $account = Accounts::create()->save($data);
  }
- $accounts = Accounts::find('all');
- return compact('accounts');
+  $conditions = array(
+   'secret'=>$user['secret']
+  );
+
+ $accounts = Accounts::find('all', array(
+  'conditions'=>$conditions
+  ));
+ return compact('accounts','user','secret','pub');
   // return $this->render(array('json'=>array(
    // 'public'=>$pub,
    // 'secret'=>$secret,

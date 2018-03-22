@@ -1,0 +1,99 @@
+.form-control::-webkit-input-placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+.form-control::-moz-placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+
+
+
+.montserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+.roboto{
+    font-family: 'Roboto', sans-serif;
+}
+.oswald{
+    font-family: 'Oswald', sans-serif;
+}
+.anton{
+    font-family: 'Anton', sans-serif;
+}
+.size20{
+	font-size:20px;
+	
+}
+.size22{
+	font-size:16px;
+	font-weight:bold
+}
+.size19{
+	font-size:15px;
+	font-weight:bold;
+	font-style:italic
+}
+.size16{
+	font-size:14px;
+	font-style:italic
+}
+.size13{
+	font-size:13px;
+	font-weight:bold;
+}
+.size10{
+	font-size:12px
+}
+.size7{
+	font-size:11px
+}
+.size0{
+	font-size:9px
+}
+.size24{
+	font-size:24px
+}
+.size26{
+	font-size:26px
+}
+.size28{
+	font-size:28px
+}
+.size30{
+	font-size:30px
+}
+.size32{
+	font-size:32px
+}
+.size36{
+	font-size:36px
+}
+.size40{
+	font-size:40px
+}
+.size400{
+	font-weight:400
+}
+.size600{
+	font-weight:600
+}
+.size700{
+	font-weight:700
+}
+h1{padding:10px}

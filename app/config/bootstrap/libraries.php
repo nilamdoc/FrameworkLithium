@@ -72,6 +72,8 @@ Libraries::add('app', ['default' => true]);
  	}
  }
 
+Libraries::add('swiftmailer', array(	'bootstrap' => 'swift_required.php'));
+
 /**
  * Enable external autoloading through composer by including its autoloader bootstrap. The
  * `autoload.php` file will be available once `composer install` was run.
