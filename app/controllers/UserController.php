@@ -98,7 +98,7 @@ class UserController extends \lithium\action\Controller {
   }
   if($verify=="Verified!"){
    $data = array(
-    email_verify => 'Verified'
+    'email_verify' => 'Verified'
    );
    Users::update($data,$conditions);
   }
