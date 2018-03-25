@@ -10,6 +10,7 @@ use lithium\storage\Session;
   $user = Users::find('first',array(
    'conditions'=>$conditions
   ));
+  if($user){
   if(count($user)>0){
  ?>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
@@ -35,6 +36,6 @@ use lithium\storage\Session;
  </nav>
 
 </div>
-<?php }else{?>
+  <?php }}else{?>
 <h1 style="text-align:center">Stellar Lumens to INR through USD, GBP, EUR, CAD</h1>
 <?php }?>
