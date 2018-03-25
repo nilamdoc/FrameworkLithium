@@ -14,6 +14,7 @@ use app\extensions\action\GoogleAuthenticator;
 class ExController extends \lithium\action\Controller {
  public function _inherit(){
   $user = Session::read('default');
+  print_r($user);
   $conditions = array(
    'email'=>strtolower($user['email']),
    'secret'=>$user['secret']
@@ -21,7 +22,7 @@ class ExController extends \lithium\action\Controller {
   $user = Users::find('first',array(
    'conditions'=>$conditions
   ));
-  if(!is_null($user)){
+  if(count($user)==0){
    return $this->redirect('/user/login');
   }
  }
