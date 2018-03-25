@@ -13,8 +13,8 @@ use app\extensions\action\GoogleAuthenticator;
 
 class ExController extends \lithium\action\Controller {
  public function _inherit(){
-  //$user = Session::read('default');
-  print_r($user);
+  $user = Session::read('default');
+  //print_r($user);
   $conditions = array(
    'email'=>strtolower($user['email']),
    'secret'=>$user['secret']
