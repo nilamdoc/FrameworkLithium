@@ -21,7 +21,7 @@ class ExController extends \lithium\action\Controller {
   $user = Users::find('first',array(
    'conditions'=>$conditions
   ));
-  if(count($user)==0){
+  if(!is_array($user)){
    return $this->redirect('/user/login');
   }
  }
