@@ -13,16 +13,16 @@ use app\extensions\action\GoogleAuthenticator;
 
 class ExController extends \lithium\action\Controller {
  public function _inherit(){
-  $user = Session::read('default');
+  //$user = Session::read('default');
   print_r($user);
   $conditions = array(
    'email'=>strtolower($user['email']),
    'secret'=>$user['secret']
   );
-  $user = Users::find('first',array(
+  $userthe = Users::find('first',array(
    'conditions'=>$conditions
   ));
-  if(count($user)==0){
+  if(count($userthe)==0){
    return $this->redirect('/user/login');
   }
  }
