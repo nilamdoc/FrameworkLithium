@@ -9,7 +9,9 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
 
 
  class TelegramController extends \lithium\action\Controller {
-  public function run($botURL){
+ public function _inherit(){}
+
+ public function run($botURL){
    if($botURL != TELEGRAM){return "False";}
     define('API_URL', 'https://api.telegram.org/bot'.TELEGRAM.'/');
     define('LITHIUM_WEBROOT_PATH', str_replace("\\","/",str_replace("F:","",dirname(LITHIUM_APP_PATH))) . '/app/webroot');
