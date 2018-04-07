@@ -1,0 +1,18 @@
+# Federation service provided by StellarID.io
+FEDERATION_SERVER="https://stellarid.io/federation/"
+
+DEPOSIT_SERVER="https://hitarth.io/deposit"
+
+ACCOUNTS=[
+	"GDFNWC3TUL7EELBSPWSWN2KETKG7CL4Y4ILFJ6LZC76PQQNOOKLCCB3F",
+	"GDE7FPQZ5FB7MW7VGISTNT4CCC3AFXISS6BLLQOBC6QDIFPAMZ7C6Z5B"
+]
+
+[[CURRENCIES]]
+code="INR"
+issuer="GCXMTKJYBOT7A32LZMXGPU7GJBWJJKS7D553KIKJGJBNBGPWQ7FVPJIM"
+conditions = "There will only be 1 billion INR in circulation."
+desc = "Stellar Lumens to INR through USD, GBP, EUR, CAD https://hitarth.io"
+display_decimals = 7
+image = "https://hitarth.io/img/Currency_75stellar-rocket-rupee300.png"
+name = "Hitarth.io"

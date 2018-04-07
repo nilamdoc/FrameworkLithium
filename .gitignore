@@ -18,6 +18,7 @@
 # Libraries 
 #libraries/*
 app/libraries/*
+app/webroot/.well-known/acme-challenge/*
 
 # Temporary files, i.e. compiled templates.
 app/resources/tmp/*
