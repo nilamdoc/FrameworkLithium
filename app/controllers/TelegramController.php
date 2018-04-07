@@ -38,12 +38,9 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
        $queryText = $inlineQuery["query"];
        $queryFrom = $inlineQuery["from"]["first_name"]. " " . $inlineQuery["from"]["last_name"]. " (".$inlineQuery["from"]["username"].")";
        $message_text = $queryFrom . "
-  You can type
-  [PRODUCT CODE] or ss
-  [OfferNewJoinee] [OfferRepurchase] or
-  [DP Location] or
-  [MCA number] or
-  [SEARCH Name]";
+/start
+/generatekeys
+/network";
 
       if (isset($queryText) && $queryText !== "") {
         $this->apiRequestJson("answerInlineQuery", [
@@ -54,19 +51,19 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
       } else {
         $this->apiRequestJson("answerInlineQuery", [
          "inline_query_id" => $queryId,
-   "cache_time"=>5,
+         "cache_time"=>5,
          "results" => [
             [
               "type" => "article",
               "id" => "0",
-              "title" => "ProductCode",
-              "message_text" => "@indianeaglesteam_bot ProductCode",
+              "title" => "Generate Keys",
+              "message_text" => "@@StellarXLMBot GenerateKeys",
             ],
             [
               "type" => "article",
               "id" => "1",
-              "title" => "Offer",
-              "message_text" => "/offer",
+              "title" => "Select Network",
+              "message_text" => "/network",
             ],
 
           ]
@@ -84,20 +81,42 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
     $text = $message['text'];
 $userName = $message['chat']['first_name'] . " " . $message['chat']['last_name'] . " (".$message['chat']['username'].")";
 $ReplyText = "Hi ".$userName.",
-<b>IndianEagles.Team</b> welcomes you.
+<b>Stellar Luments XML</b> welcomes you.
 We provide with the following details:
-|- Product information 
-|- Offers available 
-|- Distributor Points search
-|- Consultant information
+|- Generate Keys
+|- Select Network
+|- Trade XML
+|- Account Info
 
-Select one from Products, Offers, Distributor, Consultant
+Select any one
 ";
 $parse_mode="HTML";
+
+    if (strpos($text, "/generatekeys") === 0){
+      $commands = split(" ", $text);
+      $ReplyText = $this->generateKeys();
+      $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
+    }else if(strpos($text, "/selectnetwork") === 0){
+      $commands = split(" ", $text);
+      $ReplyText = $this->generateKeys();
+      $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
+    }
   }
   $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
  }
-  public function curl_get_contents($url){
+
+ function generateKeys(){
+  $keypair = Keypair::newFromRandom();
+  $secret = $keypair->getSecret() ;
+  $pub = $keypair->getPublicKey() ;
+  $text = "Public Key (pk): ".$pub. "
+";
+ $text = $text . "Secret Key (sk): ".$secret. "
+";
+  return $text;
+
+ }
+ public function curl_get_contents($url){
    $ch = curl_init();
    curl_setopt($ch, CURLOPT_HEADER, 0);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -106,127 +125,127 @@ $parse_mode="HTML";
    curl_close($ch);
    return $data;
  }
-function apiRequestWebhook($method, $parameters) {
-  if (!is_string($method)) {
-    error_log("Method name must be a string\n");
-    return false;
-  }
-  if (!$parameters) {
-    $parameters = array();
-  } else if (!is_array($parameters)) {
-    error_log("Parameters must be an array\n");
-    return false;
-  }
-  $parameters["method"] = $method;
-  header("Content-Type: application/json");
-  echo json_encode($parameters);
-  return true;
-}
-function exec_curl_request($handle) {
-  $response = curl_exec($handle);
-  if ($response === false) {
-    $errno = curl_errno($handle);
-    $error = curl_error($handle);
-    error_log("Curl returned error $errno: $error\n");
-    curl_close($handle);
-    return false;
-  }
-  $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
-  curl_close($handle);
-  if ($http_code >= 500) {
-    // do not wat to DDOS server if something goes wrong
-    sleep(10);
-    return false;
-  } else if ($http_code != 200) {
-    $response = json_decode($response, true);
-    error_log("Request has failed with error {$response['error_code']}: {$response['description']}\n");
-    if ($http_code == 401) {
-      throw new Exception('Invalid access token provided');
-    }
-    return false;
-  } else {
-    $response = json_decode($response, true);
-    if (isset($response['description'])) {
-      error_log("Request was successfull: {$response['description']}\n");
-    }
-    $response = $response['result'];
-  }
-  return $response;
-}
-function apiRequest($method, $parameters) {
-  if (!is_string($method)) {
-    error_log("Method name must be a string\n");
-    return false;
-  }
-  if (!$parameters) {
-    $parameters = array();
-  } else if (!is_array($parameters)) {
-    error_log("Parameters must be an array\n");
-    return false;
-  }
-  foreach ($parameters as $key => &$val) {
-    // encoding to JSON array parameters, for example reply_markup
-    if (!is_numeric($val) && !is_string($val)) {
-      $val = json_encode($val);
-    }
-  }
-  $url = API_URL.$method.'?'.http_build_query($parameters);
-  $handle = curl_init($url);
-  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($handle, CURLOPT_SAFE_UPLOAD, false);
-  curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-  curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-  return $this->exec_curl_request($handle);
-}
-function apiRequestPhoto($method,$photo, $parameters) {
-  if (!is_string($method)) {
-    error_log("Method name must be a string\n");
-    return false;
-  }
-  if (!$parameters) {
-    $parameters = array();
-  } else if (!is_array($parameters)) {
-    error_log("Parameters must be an array\n");
-    return false;
-  }
-  foreach ($parameters as $key => &$val) {
-    // encoding to JSON array parameters, for example reply_markup
-    if (!is_numeric($val) && !is_string($val)) {
-      $val = json_encode($val);
-    }
-  }
+ function apiRequestWebhook($method, $parameters) {
+   if (!is_string($method)) {
+     error_log("Method name must be a string\n");
+     return false;
+   }
+   if (!$parameters) {
+     $parameters = array();
+   } else if (!is_array($parameters)) {
+     error_log("Parameters must be an array\n");
+     return false;
+   }
+   $parameters["method"] = $method;
+   header("Content-Type: application/json");
+   echo json_encode($parameters);
+   return true;
+ }
+ function exec_curl_request($handle) {
+   $response = curl_exec($handle);
+   if ($response === false) {
+     $errno = curl_errno($handle);
+     $error = curl_error($handle);
+     error_log("Curl returned error $errno: $error\n");
+     curl_close($handle);
+     return false;
+   }
+   $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
+   curl_close($handle);
+   if ($http_code >= 500) {
+     // do not wat to DDOS server if something goes wrong
+     sleep(10);
+     return false;
+   } else if ($http_code != 200) {
+     $response = json_decode($response, true);
+     error_log("Request has failed with error {$response['error_code']}: {$response['description']}\n");
+     if ($http_code == 401) {
+       throw new Exception('Invalid access token provided');
+     }
+     return false;
+   } else {
+     $response = json_decode($response, true);
+     if (isset($response['description'])) {
+       error_log("Request was successful: {$response['description']}\n");
+     }
+     $response = $response['result'];
+   }
+   return $response;
+ }
+ function apiRequest($method, $parameters) {
+   if (!is_string($method)) {
+     error_log("Method name must be a string\n");
+     return false;
+   }
+   if (!$parameters) {
+     $parameters = array();
+   } else if (!is_array($parameters)) {
+     error_log("Parameters must be an array\n");
+     return false;
+   }
+   foreach ($parameters as $key => &$val) {
+     // encoding to JSON array parameters, for example reply_markup
+     if (!is_numeric($val) && !is_string($val)) {
+       $val = json_encode($val);
+     }
+   }
+   $url = API_URL.$method.'?'.http_build_query($parameters);
+   $handle = curl_init($url);
+   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt($handle, CURLOPT_SAFE_UPLOAD, false);
+   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+   return $this->exec_curl_request($handle);
+ }
+ function apiRequestPhoto($method,$photo, $parameters) {
+   if (!is_string($method)) {
+     error_log("Method name must be a string\n");
+     return false;
+   }
+   if (!$parameters) {
+     $parameters = array();
+   } else if (!is_array($parameters)) {
+     error_log("Parameters must be an array\n");
+     return false;
+   }
+   foreach ($parameters as $key => &$val) {
+     // encoding to JSON array parameters, for example reply_markup
+     if (!is_numeric($val) && !is_string($val)) {
+       $val = json_encode($val);
+     }
+   }
 
-  $url = API_URL.$method.'?'.http_build_query($parameters);
-print_r($url);
-  $handle = curl_init($url);
-  curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-  curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-  curl_setopt($handle, CURLOPT_SAFE_UPLOAD, false);
-  curl_setopt($handle, CURLOPT_INFILESIZE, filesize($photo));
-  return $this->exec_curl_request($handle);
-}
+   $url = API_URL.$method.'?'.http_build_query($parameters);
+// print_r($url);
+   $handle = curl_init($url);
+   curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+   curl_setopt($handle, CURLOPT_SAFE_UPLOAD, false);
+   curl_setopt($handle, CURLOPT_INFILESIZE, filesize($photo));
+   return $this->exec_curl_request($handle);
+ }
 
-function apiRequestJson($method, $parameters) {
-  if (!is_string($method)) {
-    error_log("Method name must be a string\n");
-    return false;
-  }
-  if (!$parameters) {
-    $parameters = array();
-  } else if (!is_array($parameters)) {
-    error_log("Parameters must be an array\n");
-    return false;
-  }
-  $parameters["method"] = $method;
-  $handle = curl_init(API_URL);
-  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-  curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-  curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
-  curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-  return $this->exec_curl_request($handle);
-}
+ function apiRequestJson($method, $parameters) {
+   if (!is_string($method)) {
+     error_log("Method name must be a string\n");
+     return false;
+   }
+   if (!$parameters) {
+     $parameters = array();
+   } else if (!is_array($parameters)) {
+     error_log("Parameters must be an array\n");
+     return false;
+   }
+   $parameters["method"] = $method;
+   $handle = curl_init(API_URL);
+   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+   curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
+   curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+   return $this->exec_curl_request($handle);
+ }
 
 }
