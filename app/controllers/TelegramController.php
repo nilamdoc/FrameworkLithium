@@ -73,8 +73,6 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
   }
     return "OK"; // return $this->render(array('layout' => false));
 }
-
- }
  function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
