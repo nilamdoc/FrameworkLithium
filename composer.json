@@ -16,6 +16,7 @@
     "require": {
         "php": ">=5.5.0",
         "unionofrad/lithium": "^1.2.0",
-        "zulucrypto/stellar-api":"^0.6.1"
+        "zulucrypto/stellar-api":"^0.6.1",
+        "unreal4u/telegram-api": "~3.3"
     }
 }
