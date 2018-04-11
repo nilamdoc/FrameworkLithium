@@ -24,7 +24,7 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
    $content = file_get_contents("php://input", false, stream_context_create($arrContextOptions));
    $update = json_decode($content, true);
    $parse_mode="HTML";
-   print_r($update["message"]);
+   var_dump($update["message"]);
    if (isset($update["message"])) {
      $this->processMessage($update["message"]);
    } else if (isset($update["callback_query"])){
@@ -71,7 +71,8 @@ use ZuluCrypto\StellarSdk\XdrModel\Operation\PaymentOp;
         ]);
       }
   }
-    return "OK"; // return $this->render(array('layout' => false));
+//    return "OK"; 
+    return $this->render(array('layout' => false));
 }
  function processMessage($message) {
   // process incoming message
