@@ -115,8 +115,8 @@ $parse_mode="HTML";
 ";
  $text = $text . "Secret Key (sk): ".$secret. "
 ";
+ return "Grnerated";
   return $text;
-
  }
  public function curl_get_contents($url){
    $ch = curl_init();
