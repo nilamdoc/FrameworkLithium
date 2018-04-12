@@ -104,7 +104,7 @@ $parse_mode="HTML";
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
     }
   }
-  $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $text, "parse_mode"=>$parse_mode));
+  $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => strpos($text, "/generatekeys"), "parse_mode"=>$parse_mode));
  }
 
  function generateKeys(){
