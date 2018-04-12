@@ -94,11 +94,11 @@ Select any one
 ";
 $parse_mode="HTML";
 
-    if (strpos($text, "/generatekeys") = 0){
+    if (strpos($text, "/generatekeys") == 0){
       $commands = split(" ", $text);
       $ReplyText = "aa";//$this->generateKeys();
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
-    }else if(strpos($text, "/selectnetwork") = 0){
+    }else if(strpos($text, "/selectnetwork") == 0){
       $commands = split(" ", $text);
       $ReplyText = $this->generateKeys();
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
