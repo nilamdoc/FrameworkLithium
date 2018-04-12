@@ -94,7 +94,7 @@ Select any one
 ";
 $parse_mode="HTML";
 
-    if (strpos($text, "/generatekeys") !== false){
+    if (strpos($text, "/generatekeys") !== "false"){
       $commands = split(" ", $text);
       $ReplyText = "aa"; //$this->generateKeys();
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
