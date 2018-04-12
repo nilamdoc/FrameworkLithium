@@ -96,7 +96,7 @@ $parse_mode="HTML";
 
     if (strpos($text, "/generatekeys") === 0){
       $commands = split(" ", $text);
-      $ReplyText = "this";//$this->generateKeys();
+      $ReplyText = "aa";//$this->generateKeys();
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
     }else if(strpos($text, "/selectnetwork") === 0){
       $commands = split(" ", $text);
@@ -104,7 +104,7 @@ $parse_mode="HTML";
       $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
     }
   }
-  $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ReplyText, "parse_mode"=>$parse_mode));
+  $this->apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $text, "parse_mode"=>$parse_mode));
  }
 
  function generateKeys(){
