@@ -15,4 +15,4 @@ conditions = "There will only be 1 billion INR in circulation."
 desc = "Stellar Lumens to INR through USD, GBP, EUR, CAD https://hitarth.io"
 display_decimals = 7
 image = "https://hitarth.io/img/Currency_75stellar-rocket-rupee300.png"
-name = "Hitarth.io"
+name = "hitarth.io"

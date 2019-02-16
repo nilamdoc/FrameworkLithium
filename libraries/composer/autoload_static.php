@@ -7,10 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac
 {
     public static $files = array (
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     );
@@ -25,13 +27,23 @@ class ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac
             'ZuluCrypto\\StellarSdk\\Test\\' => 27,
             'ZuluCrypto\\StellarSdk\\' => 22,
         ),
+        'T' => 
+        array (
+            'Telegram\\Bot\\' => 13,
+        ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Filesystem\\' => 29,
         ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
+        ),
+        'I' => 
+        array (
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Contracts\\' => 21,
         ),
         'G' => 
         array (
@@ -62,6 +74,14 @@ class ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac
         array (
             0 => __DIR__ . '/..' . '/zulucrypto/stellar-api/src',
         ),
+        'Telegram\\Bot\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/irazasyed/telegram-bot-sdk/src',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'Symfony\\Component\\Filesystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
@@ -69,6 +89,14 @@ class ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Illuminate\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/support',
+        ),
+        'Illuminate\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/contracts',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -92,11 +120,22 @@ class ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'D' => 
+        array (
+            'Doctrine\\Common\\Inflector\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9c80708e2d531e9463f1186f81f4b1ac::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
